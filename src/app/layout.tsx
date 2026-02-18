@@ -1,6 +1,7 @@
 import './globals.css'
 import { Manrope, Playfair_Display } from 'next/font/google'
 
+// Fonts are exposed as CSS variables so globals.css can use them consistently.
 const manrope = Manrope({
   subsets: ['latin'],
   variable: '--font-sans',

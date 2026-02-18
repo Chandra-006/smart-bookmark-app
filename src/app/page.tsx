@@ -19,11 +19,13 @@ export default function Home() {
   const [toast, setToast] = useState('')
   const [saving, setSaving] = useState(false)
 
+  // Lightweight feedback for async actions (fetch/insert/delete).
   const showToast = useCallback((message: string) => {
     setToast(message)
     setTimeout(() => setToast(''), 2000)
   }, [])
 
+  // Always fetch only the active user's data to keep UI state user-scoped.
   const fetchBookmarksForUser = useCallback(async (userId: string) => {
     const { data, error } = await supabase
       .from('bookmarks')
@@ -39,6 +41,7 @@ export default function Home() {
     setBookmarks(data || [])
   }, [showToast])
 
+  // Boot session on first load and react to login/logout changes.
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
       setUser(data.user)
@@ -63,6 +66,7 @@ export default function Home() {
     }
   }, [fetchBookmarksForUser])
 
+  // Keep list in sync across tabs/windows via Supabase realtime events.
   useEffect(() => {
     if (!user) return
 
@@ -87,6 +91,7 @@ export default function Home() {
     }
   }, [user, fetchBookmarksForUser])
 
+  // Accept plain domains by auto-prefixing https:// and validating with URL().
   const normalizeUrl = (rawUrl: string): string | null => {
     const candidate = rawUrl.trim()
     if (!candidate) return null
@@ -155,6 +160,7 @@ export default function Home() {
           </p>
           <button
             onClick={() =>
+              // Redirect back to the current origin after Google OAuth completes.
               supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
