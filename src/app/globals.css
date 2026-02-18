@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f6f2ea;
+  --surface: #fffefb;
+  --surface-2: #f9f3e7;
+  --text: #17110a;
+  --muted: #6f6256;
+  --line: #dfd2bf;
+  --primary: #0d6e6e;
+  --primary-strong: #0a5858;
+  --danger: #b03e2d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-sans), "Segoe UI", sans-serif;
+  background:
+    radial-gradient(1200px 400px at 10% -10%, #eadfcd 0%, transparent 65%),
+    radial-gradient(900px 400px at 95% 15%, #d9ece8 0%, transparent 60%),
+    linear-gradient(180deg, #f9f6f0 0%, var(--bg) 100%);
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.panel {
+  width: min(860px, 100%);
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow:
+    0 12px 30px rgba(69, 47, 27, 0.08),
+    0 2px 0 rgba(255, 255, 255, 0.9) inset;
+  animation: fade-up 380ms ease-out;
+}
+
+.auth-card {
+  max-width: 430px;
+  margin: 10vh auto 0;
+  text-align: center;
+  padding: 2rem;
+}
+
+.heading {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.subheading {
+  color: var(--muted);
+  margin: 0.6rem 0 0;
+  font-size: 0.96rem;
+}
+
+.top-row {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.email-chip {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  max-width: 68%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-strong) 100%);
+  box-shadow: 0 6px 14px rgba(13, 110, 110, 0.26);
+}
+
+.btn-danger {
+  border-color: #d8b8ad;
+  background: #fff7f3;
+  color: var(--danger);
+}
+
+.toolbar {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0 1.15rem;
+}
+
+.field {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.92rem;
+  outline: none;
+  transition: box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.field:focus {
+  border-color: #93bcbc;
+  box-shadow: 0 0 0 3px rgba(13, 110, 110, 0.14);
+}
+
+.bookmark-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.bookmark-item {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 12px;
+  padding: 0.7rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  animation: fade-up 260ms ease both;
+}
+
+.bookmark-title {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  display: block;
+}
+
+.bookmark-title:hover {
+  color: var(--primary-strong);
+}
+
+.bookmark-url {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 0.15rem;
+  word-break: break-all;
+}
+
+.empty {
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 1.3rem 0.8rem;
+  color: var(--muted);
+  background: #fff;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.2rem;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.84rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+  animation: fade-up 220ms ease-out;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 740px) {
+  .panel {
+    padding: 1.3rem;
+  }
+
+  .toolbar {
+    grid-template-columns: 1fr 1fr auto;
+    align-items: center;
+  }
+}
